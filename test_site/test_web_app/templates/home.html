@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>削微寒的Django项目</title>
+</head>
+<body>
+传过来个string：
+{{ test_string }}
+<br>
+传过来个list：
+{% for i in test_list%}
+{{ i }}
+{% endfor %}
+<br>
+传过来个dict：
+{{test_dict.Hero}} 激战 {{test_dict.Villain}}
+<br>----------下面循环list-------------<br>
+{% for fi_test_list in test_list %}
+    <!--加上一个if判断，如果是最后一个就不显示 ‘，‘-->
+    {{ fi_test_list}} {% if not forloop.last %},{% endif %}
+    {% empty %}
+    <li>list为空！</li>
+{% endfor %}
+<br>----------模版上得到试图对应的网站-------------<br>
+<li>{% url 'add2' 55 45 %}</li>
+
+通过url方法可以指定urls.py中的name对应的url链接，并可通过as实现把url命名给tpl中的一个变量
+{% url 'add2' 55 45 as test_link %}
+<a href="{{ test_link}}">click_this:{{ test_link }}</a>
+<li>=========逻辑判断==========</li>
+{% if var >= 80 %}
+    哎呦不错哦！
+{% else %}
+    兄弟还需要在努力一下子！
+{% endif %}
+
+
+</body>
+</html>
