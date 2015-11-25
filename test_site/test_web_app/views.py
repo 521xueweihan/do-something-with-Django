@@ -3,9 +3,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse(u'Hello xueweihan!!')
+from .form import AddForm
 
+def index(request):
+    # return HttpResponse(u'Hello xueweihan!!')
+    # 重写index方法，使用django的表单
+    if request.method == 'POST':
+        form = AddForm(request.POST)
+
+        if form.is_valid():
+            a = form.cleaned_data['a']
+            b = form.cleaned_data['b']
+            return HttpResponse(str(int(a) + int(b)))
+
+    else:
+        form = AddForm()
+    return render(request, 'index.html', {'form': form})
 
 def add(request):
     a = request.GET['a']
@@ -18,6 +31,12 @@ def add2(request, a, b):
     c = int(a) + int(b)
     return HttpResponse(str(c))
 
+def add3(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    a = int(a)
+    b = int(b)
+    return HttpResponse(a+b)
 
 def home(request):
     # return render(request, 'home.html')
