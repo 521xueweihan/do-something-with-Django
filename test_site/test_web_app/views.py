@@ -18,7 +18,7 @@ def index(request):
 
     else:
         form = AddForm()
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'index.html', {'form': form, 'test_list':[u'香蕉', u'苹果', u'西瓜', u'嘿嘿']})
 
 def add(request):
     a = request.GET['a']
